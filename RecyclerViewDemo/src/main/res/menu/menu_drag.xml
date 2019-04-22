@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<!--
+always：菜单项永远不会被收纳到溢出菜单中，因此在菜单项过多的情况下可能超出菜单栏的显示范围。
+ifRoom：在空间足够时，菜单项会显示在菜单栏中，否则收纳入溢出菜单中。
+withText：无论菜单项是否定义了icon属性，都只会显示它的标题，而不会显示图标。使用这种方式的菜单项默认会被收纳入溢出菜单中。
+never：菜单项永远只会出现在溢出菜单中。
+-->
+    <item
+        android:id="@+id/option_normal_1"
+        android:icon="@mipmap/ic_launcher"
+        android:title="线性"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/option_normal_2"
+        android:icon="@mipmap/ic_launcher"
+        android:title="网格"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/option_normal_3"
+        android:icon="@mipmap/ic_launcher"
+        android:title="瀑布"
+        app:showAsAction="withText|always" />
+
+    <item
+        android:id="@+id/option_normal_4"
+        android:title="普通菜单4"
+        app:showAsAction="never" />
+
+</menu>
