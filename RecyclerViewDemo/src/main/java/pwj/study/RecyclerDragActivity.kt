@@ -9,9 +9,11 @@ import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_recycler_drag.*
 import pwj.study.bean.Subject
 import pwj.study.drag.*
+import pwj.study.drag.swipe.SwipeSimpleRecyclerView
 import java.util.*
 
 class RecyclerDragActivity : AppCompatActivity() {
@@ -95,6 +97,7 @@ class RecyclerDragActivity : AppCompatActivity() {
                 }
             }
         })
+
         mItemTouchHelper = ItemTouchHelper(simpleItemDragHelper)
         mItemTouchHelper!!.attachToRecyclerView(recyclerView)
         recyclerView.addOnItemTouchListener(object : OnRecyclerItemClickListener(recyclerView) {
@@ -103,10 +106,21 @@ class RecyclerDragActivity : AppCompatActivity() {
             }
 
             override fun onItemLongClick(viewHolder: RecyclerView.ViewHolder) {
-                if (viewHolder.layoutPosition % 2 == 0) {
+                //长按拖拽
+                if (viewHolder.layoutPosition % 2 == 0) {//筛选条件
                     mItemTouchHelper!!.startDrag(viewHolder)
                 }
             }
+        })
+
+        recyclerView.setRightClickListener(object : SwipeSimpleRecyclerView.OnRightClickListener {
+            override fun onRightClick(position: Int, id: String) {
+                datas.removeAt(position)
+                // myAdapter.notifyItemRemoved(position);
+                adapter!!.notifyDataSetChanged()
+                Toast.makeText(this@RecyclerDragActivity, " position = $position", Toast.LENGTH_SHORT).show()
+            }
+
         })
     }
 }

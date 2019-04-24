@@ -7,17 +7,12 @@ import android.support.v7.widget.StaggeredGridLayoutManager
 import android.support.v7.widget.helper.ItemTouchHelper
 
 
-public class SimpleItemDragHelper : ItemTouchHelper.Callback() {
+class SimpleItemDragHelper : ItemTouchHelper.Callback() {
 
     private var onChannelListener: OnChannelListener? = null
-    private var OnUnDragListener: OnUnDragListener? = null
 
     fun setOnChannelListener(listener: OnChannelListener) {
         onChannelListener = listener
-    }
-
-    fun setOnUnDraglListener(listener: OnUnDragListener) {
-        OnUnDragListener = listener
     }
 
     /**
@@ -37,14 +32,7 @@ public class SimpleItemDragHelper : ItemTouchHelper.Callback() {
         }
         val swipeFlags = 0
 //        final int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
-        OnUnDragListener?.onUnDrag(p0)
-        OnUnDragListener?.let {
-            if (it.onUnDrag(p0)) {
-                return ItemTouchHelper.Callback.makeMovementFlags(0, 0)
-            } else {
-                return ItemTouchHelper.Callback.makeMovementFlags(dragFlats, swipeFlags)
-            }
-        }
+        return ItemTouchHelper.Callback.makeMovementFlags(dragFlats, swipeFlags)
     }
 
     //当上下移动的时候回调的方法
